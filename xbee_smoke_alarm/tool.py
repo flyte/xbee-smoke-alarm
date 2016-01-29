@@ -31,10 +31,14 @@ def msg_rx(data):
         print "No samples in data."
 
     try:
-        value = samples["dio-0"]
-        last_transition = datetime.now()
+        new_value = samples["dio-0"]
     except KeyError:
         print "Sample did not include pin dio-0."
+        return
+
+    if new_value != value:
+        last_transition = datetime.now()
+        value = new_value
 
 
 if __name__ == "__main__":
